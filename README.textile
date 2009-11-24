@@ -1,4 +1,4 @@
-h1. This is the data for the 'Which RoR CMS to Use?' blog
+h1. This is the data for the 'Which Ruby CMS Should I Use?' blog
 
 It is automatically transformed by "Jekyll":http://github.com/mojombo/jekyll into a static site whenever I push this repository to GitHub.
 
