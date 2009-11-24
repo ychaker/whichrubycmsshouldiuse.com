@@ -1,0 +1,66 @@
+@import url("reset.css");
+@import url("syntax.css");
+
+h2 { font-weight: bold; font-size: 2em; line-height: 1.1; }
+ 
+h3 { font-weight: bold; text-transform: uppercase; line-height: 2.5; }
+
+#wrapper {
+	width: 800px;
+	margin: 0 auto;
+	padding: 0;
+}
+#footer {
+	width: 100%;
+	margin: 10px auto;
+	text-align: center;
+	clear: both;
+	background-color: black;
+	color: white;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	padding: 10px 0;
+}
+#footer a, #footer a:active {
+	text-decoration: none;
+	color: red;
+}
+#footer a:focus, #footer a:hover { text-decoration: underline; }
+
+#header { 
+	width: 100%; 
+	display: inline; 
+	float: left;
+	clear: both; 
+	margin-bottom: 1em;
+	background-color: black;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	padding-top: 10px;
+}
+#header h1 a { 
+	width: 100%;
+	height: 250px;
+	display: inline; 
+	float: left;
+	clear: both; 
+	text-indent: -9999em; 
+	overflow: hidden; 
+	background-image: url('/images/logo.png'); 
+	background-repeat: no-repeat;
+}
+#header h1 a:focus, #header h1 a:hover, #header h1 a:active { }
+
+#content { padding: 10px; }
+
+
+.posts li {
+	list-style: square inside url("/images/bullet.png");
+}
+
+.highlight pre, .highlight code { 
+	font-family: monospace; 
+	background-color: #000; color: #FFF;
+	overflow: scroll;
+	padding: 10px;
+}
