@@ -1,0 +1,24 @@
+---
+layout: post
+title: Introduction
+---
+
+p. As a web developer in a consulting company, one of the most common ways to pay the bills is to pickup short projects that usually evolve around the need for an easy and quick way to produce static content. This falls under the domain of Content Management Systems ( CMS ) and the web is dominated by websites built on top of some flavor of a CMS. The most common ones are blogging CMS such as WordPress.  
+
+p. The complexity of these projects resides in many areas some of which are the custom needs of the client and the flexibility of the CMS. It is difficult to design a system that is powerful enough to be able to perform all possible tasks and remain simple to allow developers to customize some of its functionality. A CMS is usually marketed as a quick and dirty way to get someone's content published without any knowledge of programming or system administrating. What this means is the fact that those systems are designed and built with a non-programmer in mind and thus a developer's task to customize such systems becomes a hard and frustrating chore. 
+
+p. Currently, the leading CMS all come from the PHP world with WordPress championing the blogging realm, Moodle for the education sphere and Drupal, Joomla and ExpressionEngine for all other needs. The focused ones seem to do their job very well and expectedly so. The rest on the other hand are a nightmare for developers to deal with. If the project you're working on involves more than just installing and configuring a few modules, you are in for a lot of WTFs/minute and as we all know that is not a good sign. Software development can be fun and some tools allow that more than others. Developing in Ruby and working with the Ruby on Rails framework have always been enjoyable experiences which is why I have decided to finally test the Ruby CMS waters. 
+
+p. As I mentioned before, the tools that are focused on accomplishing a particular task have mostly done a good job at it and therefore I will not be discussing things like "Jekyll":http://github.com/mojombo/jekyll which this blog is built on. The focus of this project will be systems that would rival or be candidates to replace a CMS like Drupal. I will be referencing Drupal in some comparisons and may use it as a reference point because of my experience developing with it, that of course does not mean that Joomla or ExpressionEngine might perform the same tasks discussed as well or even better than Drupal. I have more experience using Drupal and it is arguably the most popular CMS currently in use so I believe that it provides a good reference point for future discussions and comparisons. 
+
+p. The entire Rails ecosystem is still relatively young and so is the Ruby CMS world. It is a growing field and I believe that it has recently reached a maturity level that is good enough for it to contend on a high level. That is why I consider this to be a good time to embark on the type of project that you will see documented on this blog. After all this talk, what is this project I speak of?  
+
+p. The open source community prides itself on providing documentation and help of any form possible to its members. What I hope this to be is a source for people trying to work with a Ruby or Ruby on Rails CMS to get a feel for what they are getting themselves into. The idea is still developing but the early stages consist of the following:
+
+* Identify three CMS with a decent support/adoption community
+* Develop a small site using each of the systems (a website for a conference with some sort of user registration and social media integration)
+* Document the experiences
+* Come up with a comparison of each system using the fact that the site developed is the same and is used as a common ground for a fair evaluation of each CMS
+* Try to identify which CMS provided the best overall and specific experience
+
+p. What I hope to gain from this is some personal experience in a new avenue of web development, but also share that experience with the rest of the community. Surely I am not the only one proposing such a task but I still hope that my efforts are fruitful and able to provide a better grasp of the technologies that are available for us to use.

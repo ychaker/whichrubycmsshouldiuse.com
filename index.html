@@ -4,15 +4,38 @@ title: What RoR CMS to Use?
 ---
 
 <div id="home">
-  <h2>Blog Posts</h2>
+	<div id='manifesto'>
+			<h2>Manifesto</h2>
+		
+			<h3>Who:</h3>
+			<ul>
+				<li><a href='mailto:ychaker@o19s.com?subject=[WRCMS] feedback'>Youssef Chaker</a></li>
+				<li>Software Developer</li>
+				<li><a href='http://www.o19s.com'>OpenSource Connections</a></li>
+			</ul>
+		
+			<h3>What:</h3>
+			<p>
+				Try to establish an understanding of the Ruby on Rails CMS ecosystem.
+			</p>
+		
+			<h3>How:</h3>
+			<p>
+				Build the same small application using available CMS solutions and provide a comparison of the experiences.
+			</p>
+	</div>
+	
+	<div id='posts-list'>
+	  <h2>Blog Posts</h2>
   
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span>{{ post.date | date_to_string }}</span>
-        &raquo;
-        <a href="{{ post.url }}">{{ post.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+	  <ul class="posts">
+	    {% for post in site.posts %}
+	      <li>
+	        <span>{{ post.date | date_to_string }}</span>
+	        &raquo;
+	        <a href="{{ post.url }}">{{ post.title }}</a>
+	      </li>
+	    {% endfor %}
+	  </ul>
+	</div>
 </div>
