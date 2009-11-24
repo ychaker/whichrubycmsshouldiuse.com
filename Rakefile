@@ -12,7 +12,8 @@ task :deploy do
   Net::SSH.start('74.50.57.225', username, :port => 22, :password => password) do |ssh|
     commands = <<EOF
 cd /var/www/whichrubycmsshouldiuse.com
-git pull
+git pull origin #{branch}
+rm -R _site/
 jekyll --no-auto
 EOF
     commands = commands.gsub(/\n/, "; ")
