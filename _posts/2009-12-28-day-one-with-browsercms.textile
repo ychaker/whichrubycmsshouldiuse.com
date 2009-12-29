@@ -1,0 +1,171 @@
+---
+layout: post
+title: Day One with BrowserCMS
+---
+
+p. For the first Ruby CMS I decided to try out BrowserCMS. The home page for this CMS can be found at "BrowserCMS.org (BrowserCMS home page)":homepage and that is where you can find all the links you need for the project such as the "Github repository (Github repository for BrowserCMS)":repo and "Documentation (Documentation Link)":doc.
+
+p. The first thing that is required is to install the gem, using the following:
+
+{% highlight bash %}
+$ sudo gem install browsercms
+{% endhighlight %}
+
+Then create your Rails app using the BrowserCMS template like so:
+
+{% highlight bash %}
+$ rails my_new_project_name -d mysql -m http://browsercms.org/templates/blank.rb
+$ cd my_new_project_name
+$ script/server
+{% endhighlight %}
+
+p. Once that is done, navigate to "http://localhost:3000/":http://localhost:3000/ using your favorite browser and you should see the following: 
+
+div(screenshot). !/images/index_screenshot.png(Screen Shot of Default Index Page)!:/images/index_screenshot.png
+
+To start editing got to the admin login page at "http://localhost:3000/cms/login":http://localhost:3000/cms/login which looks like the image below and enter the default admin username/password which are cmsadmin/cmsadmin
+
+div(screenshot). !/images/admin_login_screenshot.png(Screen Shot of Admin Login Page)!:/images/admin_login_screenshot.png
+
+After signing in successfully you will notice the admin panel appear at the top of the page. 
+
+div(screenshot-wide). !/images/admin_panel_screenshot.png(Admin Panel Screen Shot)!:/images/admin_panel_screenshot.png 
+
+p. You will notice that the first thing this CMS provides you are two links. The first one is to edit the default template and the second one to create a new template. This means that you can start creating your site's layout immediately. Most projects I have worked on that used a CMS were projects where we had to port an existing base. What that means is that the first step towards the migration, before adding any new functionality to make use of the CMS, is to take the existing pages or code and recreate them under the new system. The major part of it usually evolves around the layout and the theme. Which is where we will start for this demo. 
+
+p. As I mentioned in the introduction post, I will be building a demo site based on my latest project using Drupal. In that project I resorted to creating a block for a header image to help the content editors change the image without much problem or digging around in code. BrowserCMS provides us with the ability to create page partials, which will substitute for Drupal's blocks. Heading over to "http://localhost:3000/cms/page_partials":http://localhost:3000/cms/page_partials will show us a list of all available partials. To start with there will not be any available. The first step is to add one by clicking on the "Add" button and then provide the following information:
+
+* Name
+* Format (default: html)
+* Handler (default: erb)
+* Body
+
+p. Now that we have created our header partial, we need to insert it into our template. Go to "http://localhost:3000/cms/page_templates/":http://localhost:3000/cms/page_templates/ for the list of available templates. Unlike the partials, templates already comes with a default one called "Default" (d'oh!). You can choose to create a new one, and just like the page partials provide the following information:
+
+* Name
+* Format (default: html)
+* Handler (default: erb)
+* Body
+
+p. What's cool about it is that you get a default body already filled in and all you have to do is make the appropriate changes: 
+
+{% highlight rhtml %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title><%= page_title %></title>
+    <%= yield :html_head %>
+  </head>
+  <body>
+    <%= cms_toolbar %>
+    <%= container :main %>
+  </body>
+</html>
+{% endhighlight %}
+
+p. In our case we will edit the default template to match our previously developed template for Drupal. After re-ordering a couple of things and adding missing divs, the template looks like this:
+
+{% highlight rhtml %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title><%= page_title %></title>
+    <%= yield :html_head %>
+    <%= stylesheet_link_tag "nvc/vet10.css" %>  
+  </head>
+  <body>
+    <%= cms_toolbar %>
+    <div id="top"><a href="#content">Skip to content</a></div>
+    <div id="wrapper">
+			<div id="header">
+				<%= render :partial => "/partials/header_image" %>
+			</div>
+
+			<div id="aside">
+				<div id="nav_left">
+					<%= render_menu %>
+				</div>
+					<%= render :partial => "/partials/medal_image" %>
+			</div><!-- #aside -->
+
+			<div id="content">
+				<div id="intro">
+					<h2><%= @page_title %></h2>
+				</div><!-- #intro -->
+
+				<div id="content_main">
+					<%= container :main %>
+				</div><!-- #content_main -->
+			</div><!-- #content -->
+
+			<div id="footer">
+				<%= render_menu %>
+			</div>
+    </div>
+  </body>
+</html>
+{% endhighlight %}
+
+p. Which is much simpler than the 110-line template used for Drupal. Notice this part
+
+{% highlight rhtml %}
+<%= stylesheet_link_tag "nvc/vet10.css" %>  
+{% endhighlight %}
+
+p. This is where I link to my custom stylesheet which is located under:
+
+{% highlight rhtml %}
+`-public
+ `-stylesheets
+  `-cms
+  `-nvc
+   `-vet10.css 
+{% endhighlight %}
+
+p. The folder 'cms' is where BrowserCMS keeps its stylesheets and this is followed anywhere BrowserCMS has copied its own specific files such as the images folder. The 'nvc' folder is not necessary but I have chosen to use this kind of separation for this demo. 
+
+p. Our page now looks something like this (I did not copy all the content, just a few stuff for the purposes of this demo):
+
+div(screenshot). !/images/layout_screenshot.png(Layout Screen Shot)!:/images/layout_screenshot.png 
+
+p. And on the admin side:
+
+div(screenshot). !/images/layout_screenshot_admin.png(Admin Layout Screen Shot)!:/images/layout_screenshot_admin.png 
+
+p. Notice the icons at the top of the content:
+
+div(screenshot-wide). !/images/content_panel.png(Content Panel Screen Shot)!:/images/content_panel.png 
+
+p. BrowserCMS allows you to add blocks of content to a page and this content can be one of the following:
+
+* Text (can include attachments through the use of a rich text editor)
+* Portlet (Dynamic Portlet, Email Page Portlet, Login Portlet, Tag Cloud Portlet)
+* File
+* Image
+
+p. And once you have added a block, it is possible to re-order/edit/remove any block on the page. You also can add pre-existing blocks which is very useful because on my Drupal project the client wanted "Back to top" links and a horizontal line after any long content and with the way BrowserCMS handles adding blocks this becomes easier than just a copy/paste of the code.
+
+div(screenshot-wide). !/images/back_to_top.png(Back To Top Screen Shot)!:/images/back_to_top.png 
+
+p. Adding images to your site is also very easy. You can do it in multiple ways: Either through the content library, adding an image block to a page or even attaching an image to a text content. 
+
+p. One of the most tedious and annoying thing I have experienced with Drupal is upgrading its core. If your code base is under source control using SVN, to update the Drupal core you must delete the existing one and insure that it is removed from the repository and then download the new version of the code and commit it. This could really become a messy affair specially because the Drupal core is huge. With BrowserCMS, on the other hand, upgrading or downgrading is very simple and easy. The gem I had installed at the beginning of the day was at version 3.0.5 which introduced an error (For more info check this "thread (Google Group Thread)":bugreport). So I had to downgrade to the previous version (3.0.4) for the fix. I was able to do it with only a couple of steps (from the wiki "page (Upgrading BrowserCMS Wiki Page)":upgrading):
+
+{% highlight bash %}
+sudo gem install browsercms -v=3.0.4
+cd /path/to/your/project
+script/generate browser_cms
+rake db:migrate
+{% endhighlight %}
+
+p. This pretty much concludes Day One with BrowserCMS. The basic layout is in place and we are able to crate static content. Next I will look into installing and using some of the available modules. Since the demo site I am building is a conference site, I will look into the "event module (Link to event module)":event-module and the  "event module registration (Link to event registration module)":event-module-registration. 
+
+[homepage]http://www.browsercms.org/
+[repo]http://github.com/browsermedia/browsercms
+[doc]http://www.browsercms.org/doc/guides/html/index.html
+[upgrading]http://wiki.github.com/browsermedia/browsercms/upgrading-a-browsercms-project
+[bugreport]http://groups.google.com/group/browsercms/browse_thread/thread/26902fe84062b382
+[event-registration-module]http://github.com/browsermedia/bcms_event_registration
+[event-module]http://github.com/browsermedia/bcms_event

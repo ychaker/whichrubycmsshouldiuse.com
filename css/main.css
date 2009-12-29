@@ -114,9 +114,32 @@ li {
 .meta {
 	padding: 10px 0;
 }
-.meta .date{
+.meta .date {
 	background-color: black;
 	color: white;
 	padding: 5px;
+}
+.screenshot a, 
+.screenshot a:hover, 
+.screenshot a:visited, 
+.screenshot a:active,
+.screenshot-wide a, 
+.screenshot-wide a:hover, 
+.screenshot-wide a:visited, 
+.screenshot-wide a:active {
+	text-decoration: none;
+	color: black;
+}
+.screenshot img {
+	width: 500px;
+	height: 300px;
+	margin: 10px;
+	border: 1px solid black;
+}
+.screenshot-wide img {
+	width: 800px;
+	height: 200px;
+	margin: 10px;
+	border: 1px solid black;
 }
 /* end post page */
