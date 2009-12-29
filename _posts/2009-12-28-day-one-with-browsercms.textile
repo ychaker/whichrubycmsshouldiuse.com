@@ -160,7 +160,7 @@ script/generate browser_cms
 rake db:migrate
 {% endhighlight %}
 
-p. This pretty much concludes Day One with BrowserCMS. The basic layout is in place and we are able to crate static content. Next I will look into installing and using some of the available modules. Since the demo site I am building is a conference site, I will look into the "event module (Link to event module)":event-module and the  "event module registration (Link to event registration module)":event-module-registration. 
+p. This pretty much concludes Day One with BrowserCMS. The basic layout is in place and we are able to crate static content. Next I will look into installing and using some of the available modules. Since the demo site I am building is a conference site, I will look into the "event module (Link to event module)":event-module and the  "event module registration (Link to event registration module)":event-registration-module. 
 
 [homepage]http://www.browsercms.org/
 [repo]http://github.com/browsermedia/browsercms
