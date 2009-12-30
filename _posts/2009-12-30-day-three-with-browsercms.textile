@@ -1,0 +1,34 @@
+---
+layout: post
+title: Day Three with BrowserCMS
+---
+
+p. In many cases, when building a custom website for a client, the word "custom" is actually key because the client wants to provide functionality that is unique and not present in any of the systems available to work with (or at least so they think). In the occasion where that is actually true, you (the developer) have to create custom content to fill your needs. This is precisely what I explored on Day Three with BrowserCMS. 
+
+p. This blog post will be short and sweet. Following the HOWTO of the "Developer Guide page (Developer Guide Page Link)":developer-guide is straight forward. Creating a custom content type follows the same principles of creating new content with any regular Rails App. Using a keyword or two in the generation process is all it takes to integrate your new model with BrowserCMS's content. 
+
+p. The only caveat of this approach is that it involves what some people will call "coding". Many "site admins" like using a CMS because of the ability to do pretty much everything from an administration panel without having to write any piece of code. That is why most of the CMSes available are "user friendly" and geared towards designers (basically, people with no programming experience), which also make them a nightmare for developers who are trying to extend the CMS's capability and add new functionality. Make no mistake, BrowserCMS is not one of those systems. 
+
+p. Even though the BrowserCMS Documentation says:
+
+bq. BrowserCMS is a general purpose, open source Web Content Management System (CMS), written in Ruby on Rails. It is designed to support three distinct groups of people:
+
+bq. 1. Non-technical web editors who want a humane system to manage their site, without needing to understand what HTML or even Rails is.
+2. Designers who want to create large and elegantly designed websites with no artificial constraints by the CMS.
+3. Developers who want to add a CMS into their Rails projects, or create CMS driven websites for their clients.
+
+p. I would consider BrowserCMS more suitable for the third type of person mentioned in the above quote.
+
+p. What does this mean? The answer was well put by William Wallace saying:
+
+bq. They may take our lives, but they'll never take our FREEDOM!
+!/images/braveheart.jpg(Braveheart Movie Poster)!:http://tvtropes.org/pmwiki/pmwiki.php/Main/Braveheart
+
+p. Basically, this method of creating custom content gives the developer all the freedom he enjoys developing a regular RoR application. There is little need for learning new __hooks__ or __magic methods__ and __tricks__ to be able to extend a CMS or add new behavior. This finally provides a way for a consultant like me who is asked to develop a site using a CMS to actually be charging for time spent doing actual work, actual programming instead of __arm wrestling__ with a system. 
+
+p. There is still a case to be made for something like "Drupal's CCK Module (Drupal CCK Module Link)":drupal-cck which provides an interface to create custom content from the browser without delving into coding. But in my opinion you will still be bound by the module's limitations and at best you can get into __hacking__ or __monkey patching__, which in my experience has been the worst thing I have done as a web developer. 
+
+p. What BrowserCMS offers is the ability to develop __The Rails Way__ while still providing your users with the interaction and usability of the typical CMS. With that note, our little experiment with BrowserCMS comes to an end. Next time I will take look at another Ruby CMS.
+
+[drupal-cck]http://drupal.org/project/cck
+[developer-guide]http://www.browsercms.org/doc/guides/html/developer_guide.html
