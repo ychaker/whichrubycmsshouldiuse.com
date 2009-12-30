@@ -1,0 +1,96 @@
+---
+layout: post
+title: Day Two with BrowserCMS
+---
+
+p. Now that we have explored some of the "out of the box" functionality of BrowserCMS and modified the theme, it is time to extend its functionality through the use of modules. If you are familiar with Drupal, you are used to downloading the source code of a module to one of the folders where Drupal looks for them and then installing it through the admin menu. With BrowserCMS the process is a bit different. The modules I will be using today are the  "Event Module (BrowserCMS Event Module Link)":event-module and the "Event Registration Module (BrowserCMS Event Registration Module Link)":event-registration-module.
+
+p. Installing a BrowserCMS module requires the following steps (check the "documentation (BrowserCMS Documentation Site Link)":installing-module site for more info):
+
+# Downloading the source code
+# Getting the Gem installed
+# Telling BrowserCMS to use that Gem
+# Pulling the module specific code into your project (like migrations)
+# Running migrations
+
+p. Once you have completed the instructions and installed the module, you can navigate to the content library of your project and you will see a new content type added, in this case called "Event":
+
+div(screenshot). !/images/event_type_screenshot.png(Event Type Screen Shot)!:/images/event_type_screenshot.png 
+
+p. And new portlets: 
+
+div(screenshot-wide). !/images/event_portlet_screenshot.png(Event Portlets Screen Shot)!:/images/event_portlet_screenshot.png 
+
+p. And new category types:
+
+div(screenshot-wide). !/images/event_category_screenshot.png(Event Category Type Screen Shot)!:/images/event_category_screenshot.png 
+
+p. Adding a new event is just like adding any new content. Each content type of course requires its specific set of fields. The event module comes with a page that contains both portlets available. This page shows the list of events created, grouped by the month, and if you click on one of the events it displays the details of that event on the same page.
+
+div(screenshot). !/images/events_list_screenshot.png(Events List Screen Shot)!:/images/events_list_screenshot.png 
+
+div(screenshot). !/images/event_details_screenshot.png(Event Details Screen Shot)!:/images/event_details_screenshot.png 
+
+p. One thing to note is that the date fields in the form will show a calendar that pops up, even though there was no indication of it on the page.
+
+div(screenshot). !/images/event_form_screenshot.png(Event Form Screen Shot)!:/images/event_form_screenshot.png 
+
+div(screenshot). !/images/event_form_with_calendar_screenshot.png(Event Form With Calendar Screen Shot)!:/images/event_form_with_calendar_screenshot.png
+
+p. It is disappointing though that the event content type does not come with the flexibility of adding a time of an event. If you are building a conference website, you would want to provide the time of each session. Another limiting factor is the lack of ability to add or remove or edit fields belonging to a content type. For example, in the case you want to add a time field to the event content type I did not find a way to accomplish that. It will be interesting to see what sort of mechanism is available to build custom content and to configure modules. 
+
+p. After adding the Event Registration module not much changed in what was available for us to work with. The only added functionality was the ability for a user with CMS permissions to a new registrations via the "add content form". The form was not available as a portlet to include in a public page. This is probably because of the fact that the modules are still young and not fully developed yet.
+
+div(screenshot). !/images/event_registration_form.png(Event Registration Form Screen Shot)!:/images/event_registration_form.png 
+
+p. Until I looked around a bit and found that you can add a registration portlet. You will have to add a registration portlet for each event you create. Since the documentation is basically non-existent at this point, I had to dig around to be able to find it. Hopefully the documentation will be expanded soon. So creating a registration portlet for an event is pretty straight forward because the code is already populated for you, all you have to do is just choose the event it corresponds to. 
+
+div(screenshot). !/images/event_registration_portlet_screenshot.png(Event Registration Portlet Form Screen Shot)!:/images/event_registration_portlet_screenshot.png 
+
+p. Once you create your event registration portlet, add a new page where the portlet will be added. Then use the path to the page for the "Registration URL" field of the event. You will have to edit the "Event Details" portlet and change the way it displays the URL to use an anchor tag:
+
+{% highlight rhtml %}
+<p><b>Registration Url:</b> <a href='<%= @event.registration_url %>'><%= @event.registration_url %></a></p>
+{% endhighlight %}
+
+p. Once a user clicks on the link they will be redirected to the page with the form. There the user can fill the form and register for the specific event. For the purposes of this demo I left the redirect path for the form to be the same page as the form, you might want to create a new page with some sort of feedback and use it for the "Success url" field.
+
+
+div(screenshot). !/images/registration_page_screenshot.png(Event Registration Page Screen Shot)!:/images/registration_page_screenshot.png 
+
+p. The result of the registration can be shown on the admin side under "Event Registration" in the content library. 
+
+div(screenshot-wide). !/images/registration_result_screenshot.png(Event Registration Result Screen Shot)!:/images/registration_result_screenshot.png 
+
+p. After looking into these couple of modules and examining the list of modules available at the "BrowserMedia Public Repo (BrowserMedia Github Repo Link)":modules-repo, I can only say that the ecosystem is young and still requires a lot of development to reach a stage where it's mature enough to provide most the common functionalities needed these days. But if you have worked with Rails you know how easy it is to develop in this framework, which means that any new functionality can be added without much hassle. Extending a module can be done as simply as adding a file to the lib folder of your app with the required code. 
+
+p. "Views (Drupal Views Module Link)":drupal-views is one of the most powerful module available to Drupal users. Using portlets we saw how easy it is to get a similar functionality, the "Event List" portlet is a good example:
+
+{% highlight rhtml %}
+<div>
+  <% @events.group_by{|e| e.starts_on.year}.sort_by(&:first).reverse.each do |year, events_grouped_by_year| %>
+    <!-- <%= year %> -->
+    <% events_grouped_by_year.group_by{|e| e.starts_on.month}.sort_by(&:first).reverse.each do |month, events_grouped_by_month| %>
+      <b class="month"><%= Date::MONTHNAMES[month] %></b>
+      <% for event in events_grouped_by_month.sort_by(&:starts_on).reverse %>
+        <div id="event_<%= event.id %>" class="event">
+          <span class="event_starts_on"><b><%= event.starts_on.to_s(:long) %></b></span>
+          <br/>
+          <%= link_to "<b>#{h(event.name)}</b>", event_path(event.route_params) %><br/>
+          <% unless event.description.blank? -%>
+            <p><%= simple_format h(event.description) %></p>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+{% endhighlight %}
+
+p. As a conclusion to Day Two with BrowserCMS, I can say that the BrowserCMS module world still needs some time for development in the way of providing both functionality and documentation. But once that is available, there will be little that this CMS can not provide. Next time we will look into adding custom content. 
+
+[event-registration-module]http://github.com/browsermedia/bcms_event_registration
+[event-module]http://github.com/browsermedia/bcms_event
+[installing-module]http://www.browsercms.org/doc/guides/html/installing_modules.html
+[modules-repo]http://github.com/browsermedia/
+[drupal-views]http://drupal.org/project/views
