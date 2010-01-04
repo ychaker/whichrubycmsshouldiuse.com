@@ -1,0 +1,217 @@
+---
+layout: post
+title: Day One with Radiant
+---
+
+p. After taking a brief look at BrowserCMS, it is time to examine another ruby CMS. For the next few days I want to take a look at one Ruby's more known and probably most used CMS, also known as "Radiant (Radiant Home Page)":homepage. Just like any open source project in the Ruby world, you can find Radiant at its GitHub "repo (GitHub Repository for Radiant)":repo accompanied by its "Documentation (Documentation Link)":doc.
+
+p. Installing Radiant follows the same steps as installing BrowserCMS:
+
+{% highlight bash %}
+$ sudo gem install radiant
+{% endhighlight %}
+
+p. But to create a new project you have to do the following:
+
+{% highlight bash %}
+$ radiant --database [mysql|postresql|sqlite3|sqlserver|db2] path/to/project
+{% endhighlight %}
+
+p. Once you run this command, you will get a message after it completes that instructs on how to proceede:
+
+{% highlight bash %}
+== Installation and Setup
+
+Once you have extracted the files into the directory where you would like to
+install Radiant:
+
+1. Create the MySQL/PostgreSQL/SQLite/SQL Server/DB2 databases for your Web
+   site. You only need to create the "production" database, but you may also
+   want to create the "development" and "test" databases if you are developing
+   extensions or running tests.
+
+2. Edit config/database.yml to taste.  There are example files available for
+   various databases in the config directory.
+
+3. Run the database bootstrap rake task:
+   
+     % rake production db:bootstrap
+   
+   (If you would like bootstrap your development database run 'rake
+   development db:bootstrap'.)
+   
+   If you get the error "no such file to load -- spec/rake/spectask" please
+   install Rspec (gem install rspec).
+
+4. Start it like a normal Rails application. To test execute:
+   
+     % script/server -e production
+   
+   And open your Web browser on port 3000 (http://localhost:3000). The
+   administrative interface is available at /admin/. By default the bootstrap
+   rake task creates a user called "admin" with a password of "radiant".
+
+When using Radiant on a production system you may also need to set permissions
+on the public and cache directories so that your Web server can access those
+directories with the user that it runs under.
+
+Once you have installed Radiant on your own Web site, be sure to add your name
+and Web site to the list of radiant users:
+
+http://wiki.github.com/radiant/radiant/radiant-users
+{% endhighlight %}
+
+p. You can also find these instructions "online (Install Instructions)":install along with a more detailed help section on the "wiki (Wiki Installation Page)":wiki-install.
+
+p. When you follow the instructions given you will notice that Radiant will ask you to provide the name, username and password for the admin user to be created, or just use the defaults:
+
+{% highlight bash %}
+Create the admin user (press enter for defaults).
+Name (Administrator): 
+Username (admin): 
+Password (radiant): 
+
+Initializing configuration.........OK
+{% endhighlight %}
+
+p. The it will prompt you to select a template for your website, which I think is very cool specially if you know you are going to create a blog like site:
+
+{% highlight bash %}
+Select a database template:
+1. Empty
+2. Roasters (a coffee-themed blog / brochure)
+3. Simple Blog
+4. Styled Blog
+[1-4]:
+{% endhighlight %}
+
+p. Now you are ready to start building your website. I created an empty site for the purposes of this demo and when I fire up the page I am automatically redirected to the admin login page. Once you login, you will see the "Pages" page where all you site pages will be listed. 
+
+div(screenshot). !/images/radiant_start_page_screenshot.png(Pages Screen Shot)!:/images/radiant_start_page_screenshot.png 
+
+p. Using the empty template you will not have any pages listed, nor any snippets or layouts. You will have some extensions installed though:
+
+div(screenshot). !/images/radiant_extensions_screenshot.png(Extensions Page Screen Shot)!:/images/radiant_extensions_screenshot.png 
+
+p. As per the process used to discuss the first Ruby CMS we have looked at, the first thing I will be accomplishing today is creating the layout for the website. To do so, navigate to the "Layouts" page and create a new one. The form will look like this: 
+
+div(screenshot). !/images/radiant_layouts_screenshot.png(Layout Form Screen Shot)!:/images/radiant_layouts_screenshot.png 
+
+p. The form is simple, you provide the name and the body of the layout and if necessary a "Context-Type" (such as text/css or text/xml). Lets create our layout:
+
+{% highlight rhtml %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title><r:title /></title>
+	<link rel="stylesheet" type="text/css" href="/styles.css" />
+	<script type="text/javascript" src="http://www.jeroenwijering.com/embed/swfobject.js"></script>
+	<script type="text/javascript" src="/javascripts/prototype.js"></script>
+	<script type="text/javascript" src="/javascripts/scriptaculous.js?load=effects,builder"></script>
+	<script type="text/javascript" src="/javascripts/lightbox.js"></script>
+</head>
+<body>
+	<div id="top"><a href="#content">Skip to content</a></div>
+	<div id="wrapper">
+		<div id="header">
+			<r:snippet name="header_image" />
+		</div>
+
+		<div id="aside">
+			<div id="nav_left">
+				<r:snippet name="navigation" />
+			</div>
+			<r:snippet name="medal_image" />
+		</div><!-- #aside -->
+
+		<div id="content">
+			<div id="intro">
+				<h2><r:title /></h2>
+				<r:if_content part="extended">
+				<r:content part="extended" />
+			</r:if_content>
+		</div><!-- #intro -->
+
+		<div id="content_main">
+			<r:content />
+		</div><!-- #content_main -->
+	</div><!-- #content -->
+
+	<div id="footer">
+		<r:snippet name="navigation" />
+	</div>
+</div>
+</body>
+</html>
+{% endhighlight %}
+
+p. More detail on some of the parts will come later...
+
+p. Since our project was created using the empty template, we will need to create some pages to view the result of our layout work. Under the "Pages" tab, you will see an empty list of pages and a button saying "New Homepage". That would be a good place to start. The new page form is quite impressive in its content: 
+
+div(screenshot). !/images/radiant_new_page_screenshot.png(New Page Form Screen Shot)!:/images/radiant_new_page_screenshot.png 
+
+p. Other than the usual title and body, you can specify a number of page options (Layout, Page Type, Status) as well as editing options (Filter). Clicking on the "more" link would provide you with, well as the name suggests, more:
+
+div(screenshot-wide). !/images/radiant_new_page_more_screenshot.png(New Page More Screen Shot)!:/images/radiant_new_page_more_screenshot.png 
+
+p. The more impressive part about this method of creating a new page is the available references that provide help for the editor, such as the filter reference that provides help about the chosen filter and the tags reference that provides a list and description of the available tags in the page to be used by the editor. 
+
+div(screenshot). !/images/radiant_markdown_reference_screenshot.png(Filter Reference Screen Shot)!:/images/radiant_markdown_reference_screenshot.png 
+
+div(screenshot). !/images/radiant_tags_reference_screenshot.png(Available Tags Screen Shot)!:/images/radiant_tags_reference_screenshot.png 
+
+p. These references will provide help for editors without the need to dig around in overwhelming documentation in order to create simple pages. This means less time training editors and content contributors, making the developer a lot happier. 
+
+p. Also notice the two available parts for the content. The first part is the body and the other one named "extended". Radiant provides the ability to create multiple parts of a page where the body is the main one and the others are additional parts constructed on top of the body. Through the layout you create you will be able to specify how these parts are created. And to add or remove parts just use the icons available at the right of the tabs.
+
+div(screenshot-wide). !/images/radiant_page_parts_screenshots.png(Page Parts Screen Shot)!:/images/radiant_page_parts_screenshots.png
+
+p. One part of creating pages involves creating "blocks" that can be inserted into a page. Using BrowserCMS we accomplished that by creating partials, and with Drupal by creating blocks. With Radiant these parts are called snippets. In our case we want to create two snippets, one for the header image and one of the medal image below the navigation menu. Radiant does not provide a mechanism out of the box to upload images, so I will add the images used for these two snippets in the images folder of the app and link to them from the snippet.
+
+div(screenshot). !/images/radiant_header_image_snippet.png(Header Image Snippet Screen Shot)!:/images/radiant_header_image_snippet.png 
+
+div(screenshot). !/images/radiant_medal_image_snippet.png(Medal Image Snippet Screen Shot)!:/images/radiant_medal_image_snippet.png 
+
+p. After creating the snippets, we need to add our CSS to get the desired theme. Radiant handles CSS in what I think to be a peculiar way. Unlike most frameworks or CMSes, instead of adding a __.css__ file to your source code you will need to add a page that contains your CSS. To do so, you need to first create a layout to handle how a CSS page would be rendered, then you need to create new page that would be the child of your home page using the new layout and add to it your CSS code. 
+
+div(screenshot). !/images/radiant_stylesheet_layout_screenshot.png(Stylesheet Layout Screen Shot)!:/images/radiant_stylesheet_layout_screenshot.png 
+
+div(screenshot). !/images/radiant_stylesheet_page_screenshot.png(Stylesheet Page Screen Shot)!:/images/radiant_stylesheet_page_screenshot.png
+
+p. Make sure that the slug for the page has the __.css__ extension and then link to your page in your layout.
+
+{% highlight html %}
+<link rel="stylesheet" type="text/css" href="/styles.css" />
+{% endhighlight %}
+
+p. Radiant does not provide a menu system, so you will have to create your own snippet that will include your navigation links: 
+
+div(screenshot). !/images/radiant_navigation_snippet_screenshot.png(Navigation Snippet Screen Shot)!:/images/radiant_navigation_snippet_screenshot.png
+
+p. And then include the snippet in your layout:
+
+{% highlight html %}
+<r:snippet name="navigation" />
+{% endhighlight %}
+
+p. You can get more information about creating your navigation for the "wiki page (Nav Wiki Page)":wiki-nav.
+
+p. So far we have created a layout, added to the layout some CSS and a few snippets including the navigation snippet. We have also created our home page and added content to it. The result is as follows:
+
+div(screenshot). !/images/radiant_index_screenshot.png(Home Page Screen Shot)!:/images/radiant_index_screenshot.png
+
+p. One thing worth noting is the use of the page parts. Using the "extended" part I am able to create in the case our demo an intro part of the page that would be included under the title of the page. Which is a cool way to have a flexible mean for content contributers to provide an intro or any other parts of the website. 
+
+div(screenshot). !/images/radiant_extended_screenshot.png(Extended Part of Page Screen Shot)!:/images/radiant_extended_screenshot.png
+
+
+p. We have covered installing Radiant, creating a layout and adding pages and snippets. This concludes Day One with Radiant. Next time we will look at adding some of the available extensions and enhancing the functionality of the website.
+
+[homepage]http://radiantcms.org/
+[repo]http://github.com/radiant/radiant
+[doc]http://wiki.github.com/radiant/radiant/
+[install]http://github.com/radiant/radiant/raw/master/INSTALL
+[wiki-install]http://wiki.github.com/radiant/radiant#install
+[wiki-nav]http://wiki.github.com/radiant/radiant/creating-a-ul-img-based-navigation-bar

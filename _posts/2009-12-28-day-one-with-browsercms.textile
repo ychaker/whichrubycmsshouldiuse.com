@@ -3,7 +3,7 @@ layout: post
 title: Day One with BrowserCMS
 ---
 
-p. For the first Ruby CMS I decided to try out BrowserCMS. The home page for this CMS can be found at "BrowserCMS.org (BrowserCMS home page)":homepage and that is where you can find all the links you need for the project such as the "Github repository (Github repository for BrowserCMS)":repo and "Documentation (Documentation Link)":doc.
+p. For the first Ruby CMS I decided to try out BrowserCMS. The home page for this CMS can be found at "BrowserCMS.org (BrowserCMS Home Page)":homepage and that is where you can find all the links you need for the project such as the "GitHub repository (GitHub Repository for BrowserCMS)":repo and "Documentation (Documentation Link)":doc.
 
 p. The first thing that is required is to install the gem, using the following:
 
@@ -21,15 +21,15 @@ $ script/server
 
 p. Once that is done, navigate to "http://localhost:3000/":http://localhost:3000/ using your favorite browser and you should see the following: 
 
-div(screenshot). !/images/index_screenshot.png(Screen Shot of Default Index Page)!:/images/index_screenshot.png
+div(screenshot). !/images/bcms_index_screenshot.png(Screen Shot of Default Index Page)!:/images/bcms_index_screenshot.png
 
 To start editing got to the admin login page at "http://localhost:3000/cms/login":http://localhost:3000/cms/login which looks like the image below and enter the default admin username/password which are cmsadmin/cmsadmin
 
-div(screenshot). !/images/admin_login_screenshot.png(Screen Shot of Admin Login Page)!:/images/admin_login_screenshot.png
+div(screenshot). !/images/bcms_admin_login_screenshot.png(Screen Shot of Admin Login Page)!:/images/bcms_admin_login_screenshot.png
 
 After signing in successfully you will notice the admin panel appear at the top of the page. 
 
-div(screenshot-wide). !/images/admin_panel_screenshot.png(Admin Panel Screen Shot)!:/images/admin_panel_screenshot.png 
+div(screenshot-wide). !/images/bcms_admin_panel_screenshot.png(Admin Panel Screen Shot)!:/images/bcms_admin_panel_screenshot.png 
 
 p. You will notice that the first thing this CMS provides you are two links. The first one is to edit the default template and the second one to create a new template. This means that you can start creating your site's layout immediately. Most projects I have worked on that used a CMS were projects where we had to port an existing base. What that means is that the first step towards the migration, before adding any new functionality to make use of the CMS, is to take the existing pages or code and recreate them under the new system. The major part of it usually evolves around the layout and the theme. Which is where we will start for this demo. 
 
@@ -128,15 +128,15 @@ p. The folder 'cms' is where BrowserCMS keeps its stylesheets and this is follow
 
 p. Our page now looks something like this (I did not copy all the content, just a few stuff for the purposes of this demo):
 
-div(screenshot). !/images/layout_screenshot.png(Layout Screen Shot)!:/images/layout_screenshot.png 
+div(screenshot). !/images/bcms_layout_screenshot.png(Layout Screen Shot)!:/images/bcms_layout_screenshot.png 
 
 p. And on the admin side:
 
-div(screenshot). !/images/layout_screenshot_admin.png(Admin Layout Screen Shot)!:/images/layout_screenshot_admin.png 
+div(screenshot). !/images/bcms_layout_screenshot_admin.png(Admin Layout Screen Shot)!:/images/bcms_layout_screenshot_admin.png 
 
 p. Notice the icons at the top of the content:
 
-div(screenshot-wide). !/images/content_panel.png(Content Panel Screen Shot)!:/images/content_panel.png 
+div(screenshot-wide). !/images/bcms_content_panel.png(Content Panel Screen Shot)!:/images/bcms_content_panel.png 
 
 p. BrowserCMS allows you to add blocks of content to a page and this content can be one of the following:
 
@@ -147,7 +147,7 @@ p. BrowserCMS allows you to add blocks of content to a page and this content can
 
 p. And once you have added a block, it is possible to re-order/edit/remove any block on the page. You also can add pre-existing blocks which is very useful because on my Drupal project the client wanted "Back to top" links and a horizontal line after any long content and with the way BrowserCMS handles adding blocks this becomes easier than just a copy/paste of the code.
 
-div(screenshot-wide). !/images/back_to_top.png(Back To Top Screen Shot)!:/images/back_to_top.png 
+div(screenshot-wide). !/images/bcms_back_to_top.png(Back To Top Screen Shot)!:/images/bcms_back_to_top.png 
 
 p. Adding images to your site is also very easy. You can do it in multiple ways: Either through the content library, adding an image block to a page or even attaching an image to a text content. 
 

@@ -15,37 +15,37 @@ p. Installing a BrowserCMS module requires the following steps (check the "docum
 
 p. Once you have completed the instructions and installed the module, you can navigate to the content library of your project and you will see a new content type added, in this case called "Event":
 
-div(screenshot). !/images/event_type_screenshot.png(Event Type Screen Shot)!:/images/event_type_screenshot.png 
+div(screenshot). !/images/bcms_event_type_screenshot.png(Event Type Screen Shot)!:/images/bcms_event_type_screenshot.png 
 
 p. And new portlets: 
 
-div(screenshot-wide). !/images/event_portlet_screenshot.png(Event Portlets Screen Shot)!:/images/event_portlet_screenshot.png 
+div(screenshot-wide). !/images/bcms_event_portlet_screenshot.png(Event Portlets Screen Shot)!:/images/bcms_event_portlet_screenshot.png 
 
 p. And new category types:
 
-div(screenshot-wide). !/images/event_category_screenshot.png(Event Category Type Screen Shot)!:/images/event_category_screenshot.png 
+div(screenshot-wide). !/images/bcms_event_category_screenshot.png(Event Category Type Screen Shot)!:/images/bcms_event_category_screenshot.png 
 
 p. Adding a new event is just like adding any new content. Each content type of course requires its specific set of fields. The event module comes with a page that contains both portlets available. This page shows the list of events created, grouped by the month, and if you click on one of the events it displays the details of that event on the same page.
 
-div(screenshot). !/images/events_list_screenshot.png(Events List Screen Shot)!:/images/events_list_screenshot.png 
+div(screenshot). !/images/bcms_events_list_screenshot.png(Events List Screen Shot)!:/images/bcms_events_list_screenshot.png 
 
-div(screenshot). !/images/event_details_screenshot.png(Event Details Screen Shot)!:/images/event_details_screenshot.png 
+div(screenshot). !/images/bcms_event_details_screenshot.png(Event Details Screen Shot)!:/images/bcms_event_details_screenshot.png 
 
 p. One thing to note is that the date fields in the form will show a calendar that pops up, even though there was no indication of it on the page.
 
-div(screenshot). !/images/event_form_screenshot.png(Event Form Screen Shot)!:/images/event_form_screenshot.png 
+div(screenshot). !/images/bcms_event_form_screenshot.png(Event Form Screen Shot)!:/images/bcms_event_form_screenshot.png 
 
-div(screenshot). !/images/event_form_with_calendar_screenshot.png(Event Form With Calendar Screen Shot)!:/images/event_form_with_calendar_screenshot.png
+div(screenshot). !/images/bcms_event_form_with_calendar_screenshot.png(Event Form With Calendar Screen Shot)!:/images/bcms_event_form_with_calendar_screenshot.png
 
 p. It is disappointing though that the event content type does not come with the flexibility of adding a time of an event. If you are building a conference website, you would want to provide the time of each session. Another limiting factor is the lack of ability to add or remove or edit fields belonging to a content type. For example, in the case you want to add a time field to the event content type I did not find a way to accomplish that. It will be interesting to see what sort of mechanism is available to build custom content and to configure modules. 
 
 p. After adding the Event Registration module not much changed in what was available for us to work with. The only added functionality was the ability for a user with CMS permissions to a new registrations via the "add content form". The form was not available as a portlet to include in a public page. This is probably because of the fact that the modules are still young and not fully developed yet.
 
-div(screenshot). !/images/event_registration_form.png(Event Registration Form Screen Shot)!:/images/event_registration_form.png 
+div(screenshot). !/images/bcms_event_registration_form.png(Event Registration Form Screen Shot)!:/images/bcms_event_registration_form.png 
 
 p. Until I looked around a bit and found that you can add a registration portlet. You will have to add a registration portlet for each event you create. Since the documentation is basically non-existent at this point, I had to dig around to be able to find it. Hopefully the documentation will be expanded soon. So creating a registration portlet for an event is pretty straight forward because the code is already populated for you, all you have to do is just choose the event it corresponds to. 
 
-div(screenshot). !/images/event_registration_portlet_screenshot.png(Event Registration Portlet Form Screen Shot)!:/images/event_registration_portlet_screenshot.png 
+div(screenshot). !/images/bcms_event_registration_portlet_screenshot.png(Event Registration Portlet Form Screen Shot)!:/images/bcms_event_registration_portlet_screenshot.png 
 
 p. Once you create your event registration portlet, add a new page where the portlet will be added. Then use the path to the page for the "Registration URL" field of the event. You will have to edit the "Event Details" portlet and change the way it displays the URL to use an anchor tag:
 
@@ -56,11 +56,11 @@ p. Once you create your event registration portlet, add a new page where the por
 p. Once a user clicks on the link they will be redirected to the page with the form. There the user can fill the form and register for the specific event. For the purposes of this demo I left the redirect path for the form to be the same page as the form, you might want to create a new page with some sort of feedback and use it for the "Success url" field.
 
 
-div(screenshot). !/images/registration_page_screenshot.png(Event Registration Page Screen Shot)!:/images/registration_page_screenshot.png 
+div(screenshot). !/images/bcms_registration_page_screenshot.png(Event Registration Page Screen Shot)!:/images/bcms_registration_page_screenshot.png 
 
 p. The result of the registration can be shown on the admin side under "Event Registration" in the content library. 
 
-div(screenshot-wide). !/images/registration_result_screenshot.png(Event Registration Result Screen Shot)!:/images/registration_result_screenshot.png 
+div(screenshot-wide). !/images/bcms_registration_result_screenshot.png(Event Registration Result Screen Shot)!:/images/bcms_registration_result_screenshot.png 
 
 p. After looking into these couple of modules and examining the list of modules available at the "BrowserMedia Public Repo (BrowserMedia Github Repo Link)":modules-repo, I can only say that the ecosystem is young and still requires a lot of development to reach a stage where it's mature enough to provide most the common functionalities needed these days. But if you have worked with Rails you know how easy it is to develop in this framework, which means that any new functionality can be added without much hassle. Extending a module can be done as simply as adding a file to the lib folder of your app with the required code. 
 
