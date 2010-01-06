@@ -1,0 +1,74 @@
+---
+layout: post
+title: Day Two with Radiant
+---
+
+p. Radiant uses extensions to, as the name suggests, extend the functionality of the CMS. These extensions can be found on, but no limited to the "Extension Registry (Radiant Extension Registry)":extension-registry. If the extension you would like to use is found in the registry, you'll be able to use the built-in script to install it. Otherwise, you will have to use the manual installation process. You can find more information about how to install and uninstall extensions on the "wiki (Installing Extensions Wiki Page)":wiki-extensions.
+
+p. For this demo I am building a conference site and __awesomely__ enough __there is an extension for that__. The extension that I will look at is called, appropriately, "Conferences (Conferences Extension Page)":conferences-extension. If you look at the "Conferences Extension GitHub Repo (Conferences Extension GitHub Repo)":conferences-git-repo you will see in the README file that there are some dependencies that you need to install before getting to the extension itself. There isn't any information on how to get those dependencies installed so follow along with these instructions:
+
+{% highlight bash %}
+# Install the fastercsv gem
+sudo gem install fastercsv
+{% endhighlight %}
+
+p. Download the "file_column plugin (File Column Pluing)":file-column into the vendor/plugins directory and if you are using a Rails version earlier than 2.1 you will need to do the following as well:
+
+{% highlight bash %}
+# Install the tzinfo_timezone plugin and tzinfo gem
+sudo gem install tzinfo
+git clone git://github.com/rails/tzinfo_timezone.git vendor/plugins/tzinfo_timezone
+{% endhighlight %}
+
+p. Then continue installing the extensions:
+
+{% highlight bash %}
+# Install the members extension
+./script/extension install members
+# Install the tinymce_filter extension
+./script/extension install tiny_mce_filter
+mv vendor/extensions/tiny_mce_filter/ vendor/extensions/tinymce_filter/
+rake radiant:extensions:tinymce_filter:update
+{% endhighlight %}
+
+p. Notice that we had to rename the folder for the tiny_mce_filter extension because of naming error and then rerun the update manually. Now you are ready to install the conferences extension:
+
+{% highlight bash %}
+./script/extension install conferences
+{% endhighlight %}
+
+p. ActionMailer spits out an error in the current settings, to fix it we must install the plugin and the extension:
+
+{% highlight bash %}
+# Install the Action Mailer & TLS plugin 
+git clone git://github.com/collectiveidea/action_mailer_optional_tls.git vendor/plugins/action_mailer_optional_tls/
+# Install the mailer extension
+./script/extension install mailer
+{% endhighlight %}
+
+p. To see the changes make sure you restart the server. If you navigate to the extensions page from the admin panel you will see the list of extensions installed.
+
+div(screenshot). !/images/radiant_extensions_page_screenshot.png(Extensions Page Screen Shot)!:/images/radiant_extensions_page_screenshot.png 
+
+p. You will also notice the new tabs that are now available for you (Submissions, Conferences, Profile).
+
+div(screenshot-wide). !/images/radiant_new_admin_tabs_screenshot.png(New Admin Tabs Screen Shot)!:/images/radiant_new_admin_tabs_screenshot.png 
+
+p. And if you navigate to the "Conferences" tab you will see all the configuration options and links to create new conferences. Enjoy! 
+
+div(screenshot). !/images/radiant_conferences_page_screenshot.png(Conferences Page Screen Shot)!:/images/radiant_conferences_page_screenshot.png 
+
+p. Installing this one extension has honestly been a pain. I had to dig around to figure out what the dependencies were and how to solve some of the problems like the ActionMailer error and the renaming of the tiny_mce_filter forlder. I hope installing other extensions is not as difficult as this one. The documentation for the extensions is lacking, even though the documentation for Radiant itself seems to be good so far. I have been on the Radiant mailing list for a while and I have seen a good response time and a lot of people willing to answer questions, so that might the best resort for help. On this note I conclude Day Two with Radiant. 
+
+
+[homepage]http://radiantcms.org/
+[repo]http://github.com/radiant/radiant
+[doc]http://wiki.github.com/radiant/radiant/
+[install]http://github.com/radiant/radiant/raw/master/INSTALL
+[wiki-install]http://wiki.github.com/radiant/radiant#install
+[wiki-nav]http://wiki.github.com/radiant/radiant/creating-a-ul-img-based-navigation-bar
+[wiki-extensions]http://wiki.github.com/radiant/radiant/installing-extensions
+[extension-registry]http://ext.radiantcms.org/
+[conferences-extension]http://ext.radiantcms.org/extensions/121-conferences
+[conferences-git-repo]http://github.com/farra/radiant-conferences-extensions
+[file-column]http://www.kanthak.net/opensource/file_column/
