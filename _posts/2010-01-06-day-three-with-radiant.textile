@@ -1,0 +1,30 @@
+---
+layout: post
+title: Day Three with Radiant
+---
+
+p. As with any usual project, there is always the need for creating custom content and custom content types. That is why, in Day Three with Radiant I will look at adding custom behavior to Radiant. I think this is an important part of any CMS and the way the system allows you to create custom content is very critical. 
+
+p. If you look at the directory structure of a typical Radiant project you will notice that the __app__ folder that is usually found in a Rails application is missing. This means that the normal way of creating models, views and controllers that is available in Rails is not offered to us by Radiant. To achieve this goal we have to resort to using extensions. A number of articles can be found on the subject on the wiki page "Creating Extensions (Creating Extensions Wiki)":wiki-create-extensions.
+
+p. The first guide to look at is the "How-To: Create an Extension (How-To: Create an Extension Wiki)":wiki-howto-create-extension. The method they suggest in this tutorial is to create a separate Rails application that contains the models, views, controllers and migrations. Make sure that this application contains all your logic and data that you require, then copy the necessary files to the extension directory that you have created. Then run the migration and update script. When that is done, you can now add the routes required by your extension and you are done, or are you?
+
+p. If you need to add custom page types, which are pages with custom behavior, your work is not done yet. You will need to follow the instructions on "this page (Add Custom Page Type Wiki)":wiki-custom-page-type. And if you require custom Radius tags, you will have to do something like what is suggested in "this tutorial (Custom Radius Tags Wiki)":wiki-custom-radius-tags.
+
+p. This whole process looks tedious to me. It seems that the work required for a developer to be able to add new models or content types is doubled by the fact that the developers have to maintain a temporary application where the new models are developed and tested. It is possible to create your extension straight in your Radiant project but you will not have the assistance of the generators, which can be very helpful and time saving. The tutorial does mention the following:
+
+bq. Until there is an extension scaffolding generator
+
+p. So hopefully a future version of Radiant will include these generators and make this task less time consuming and easier on the developers.
+
+p. One concern that I still have is the fact that Radiant takes the dominant role of the __project owner__ or __project parent__ which means that the application lives within Radiant. This is opposed to the case where the CMS is an extension of the original application. This might present problems for projects where a CMS became a requirement or a necessity after the original code base has been developed. A project that will include Radiant, is a project that needs to be created as a Radiant project from the start or has to be exported into a Radiant extension. Most CMS systems out there present the same conundrum for developers. So in the case where a CMS is needed to enhance a website by providing a means to create static pages or a blog, a CMS that can be installed as an addition or extension to the application (such as BrowserCMS) has an advantage over a CMS like Radiant.
+
+p. Overall, Radiant seems like a good candidate for projects where you know upfront that you will be using a CMS. It has good core documentation by the Radiant developers and an extensive list of extensions. Extending the application yourself is possible and relatively easy even though it requires a number of steps to be taken. Following the mailing list and browsing the wiki pages give me the impression that the project is in full swing and development on it is always progressing. Also, the community provides great support. At the conclusion of Day Three with Radiant I can say that this CMS is worth a shot if you are starting a new project and want to take advantage of the things that Ruby and Ruby on Rails provide you.
+
+
+
+[wiki-create-extensions]http://wiki.github.com/radiant/radiant/creating-extensions
+[wiki-howto-create-extension]http://wiki.github.com/radiant/radiant/how-to-create-an-extension
+[wiki-custom-radius-tags]http://wiki.github.com/radiant/radiant/adding-custom-radius-tags
+[wiki-custom-page-type]http://wiki.github.com/radiant/radiant/creating-a-custom-page-type
+

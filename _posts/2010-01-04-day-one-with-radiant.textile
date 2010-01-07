@@ -196,13 +196,13 @@ p. And then include the snippet in your layout:
 <r:snippet name="navigation" />
 {% endhighlight %}
 
-p. You can get more information about creating your navigation for the "wiki page (Nav Wiki Page)":wiki-nav.
+p. You can get more information about creating your navigation from the "wiki page (Nav Wiki Page)":wiki-nav.
 
 p. So far we have created a layout, added to the layout some CSS and a few snippets including the navigation snippet. We have also created our home page and added content to it. The result is as follows:
 
 div(screenshot). !/images/radiant_index_screenshot.png(Home Page Screen Shot)!:/images/radiant_index_screenshot.png
 
-p. One thing worth noting is the use of the page parts. Using the "extended" part I am able to create in the case our demo an intro part of the page that would be included under the title of the page. Which is a cool way to have a flexible mean for content contributers to provide an intro or any other parts of the website. 
+p. One thing worth noting is the use of the page parts. Using the "extended" part I am able to create in the case our demo an intro part of the page that would be included under the title of the page. Which is a cool way to have flexible means for content contributers to provide an intro or any other parts of the website. 
 
 div(screenshot). !/images/radiant_extended_screenshot.png(Extended Part of Page Screen Shot)!:/images/radiant_extended_screenshot.png
 
