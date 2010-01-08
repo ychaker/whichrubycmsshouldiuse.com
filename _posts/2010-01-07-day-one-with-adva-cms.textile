@@ -1,0 +1,195 @@
+---
+layout: post
+title: Day One with adva-cms
+---
+
+p. After looking at two of the most popular or talked about Ruby CMSes out there it is time to look at what else is out there. Searching (or Googling) for "Ruby CMS" or "Rails CMS" brings back a few results but most of them are blog posts, articles or questions about the topic. You are required to do some deep digging before getting a good list of available CMSes. AjaxLines has an article about the "Top 20 Ruby CMS (Top 20 Ruby CMS Article)":top-20 but the post is from August 2006 and the information on there is outdated. A more recent post can be found on "A Fresh Cup (Rails CMS Alternatives Post)":a-frash-cup which provides more current information. The post provides a good list of projects. I would like to add to it that even though "Comatose (Comatose CMS)":comatose-cms is listed under the __inactive__ list, it is still an alternative worth looking into. "RailFrog (RailFrog CMS)":railfrog is another project that looks to have good documentation and shows signs of life. It also has to parts of the project, one that allows you to create you CMS project immediately and one that hooks to your Rails app through the Engines system. Another CMS worth investigating is "Community Engine (Community Engine Homepage)":community-engine, which seems to give you a lot out of the box and does that well but I have heard that developing for it is a pain.
+
+p. All of the afore mentioned projects look to be good candidates, but I have decided that today I will take a look at one of the probably lesser known ones called "adva-cms". You can find adva at its "home (adva-cms homepage)":homepage and the repo on "GitHub (adva-cms repo)":repo. Looking at the README file of the project, the first thing that catches my eyes is the following: 
+
+bq. Different from others, adva-cms lives in vendor directory and keeps your main
+app directory clean and dandy. So you can reclaim app directory and use it
+only for your own application files.
+
+bq. adva-cms makes it extensible: you can only pick those engines/features you really
+need for your application and omit the rest. All engines are designed to work
+together seamlessly, so the whole platform feels much more consistent for
+similar but separate Rails applications.
+
+p. That is the kind of thing developers like to see in a system that they want to use. So lets get started. You can find more information on the "wiki page (adva-cms Wiki Page)":doc but I will take you through the basic steps here. First make sure you have the Rails 2.3.4 and ImageMagick gems installed then create you adva-cms app using Rails templates.
+
+{% highlight bash %}
+# use '-d mysql' if you want to use MySQL instead of SqlLite (or any other engine)
+rails my-app -m http://github.com/svenfuchs/adva_cms/raw/master/templates/adva-cms.0.3.0.rb
+{% endhighlight %}
+
+p. The installation spits out this fine tip, which you might want to follow:
+
+bq.  # this might take a bit, grab a coffee meanwhile :)
+
+p. If you have not created your database before hand you will see something like this: 
+
+{% highlight bash %}
+ rake  adva:install:core -R vendor/adva/engines/adva_cms/lib/tasks
+rake aborted!
+Unknown database 'adva_demo_development'
+
+(See full trace by running task with --trace)
+{% endhighlight %}
+
+p. This can be easily fixed by following these steps:
+
+{% highlight bash %}
+cd /path/to/app
+rake db:create
+rake  adva:install:core -R vendor/adva/engines/adva_cms/lib/tasks
+{% endhighlight %}
+
+p. You should now be set, navigate to "http://localhost:3000/ (localhost)":http://localhost:3000/ to start the installation:
+
+div(screenshot). !/images/adva_install_screenshot.png(Adva Installation Screen Shot)!:/images/adva_install_screenshot.png 
+
+p. After you fill the easy and shot form you should see the success screen which also has a link to the admin part of the side.
+
+div(screenshot). !/images/adva_installation_success_screenshot.png(Adva Installation Success Screen Shot)!:/images/adva_installation_success_screenshot.png 
+
+div(screenshot). !/images/adva_admin_section_screenshot.png(Adva Admin Page Screen Shot)!:/images/adva_admin_section_screenshot.png 
+
+p. The instructions for the installation mention the following:
+
+{% highlight rb %}
+# config/initializers/new_rails_defaults.rb
+# either comment out the following line or set it to true
+ActionController::Routing.generate_best_match = false
+{% endhighlight %}
+
+p. So be sure to follow them before going forward. After finishing the vanilla install of the site, you will want to install the engines and plugins that come with the CMS. You have the option to either install all of the, the core ones, or specific ones you specify. Check the "README file (Adva README File)":readme for more info. For this demo I will opt to install them all:
+
+{% highlight bash %}
+rake adva:install:all
+rake adva:assets:install
+{% endhighlight %}
+
+p. Which will install the following:
+
+{% highlight bash %}
+installing engines: adva_activity, adva_assets, adva_blog, adva_calendar, adva_cms, adva_comments, adva_contact_mails, adva_forum, adva_newsletter, adva_photos, adva_rbac, adva_spam, adva_themes, adva_user, adva_wiki
+installing plugins: adva_cells, adva_context_templates, adva_fckeditor, adva_google_analytics, adva_meta_tags, adva_post_ping, adva_url_history
+{% endhighlight %}
+
+p. For today, the important engine that we are interested in is the adva_themes one. This is what we will use to create our theme and layout for our site. The current admin panel looks like so:
+
+div(screenshot-wide). !/images/adva_admin_panel_screenshot.png(Adva Admin Panel Screen Shot)!:/images/adva_admin_panel_screenshot.png
+
+p. Click on the "Themes" tab. You should see an empty list. Create a new theme by filling the form.
+
+div(screenshot). !/images/adva_new_theme_screenshot.png(Adva New Theme Screen Shot)!:/images/adva_new_theme_screenshot.png
+
+p. Once you are done filling the "New Theme" form you will be redirected to a page that shows you all the associated files. By default you should only see a __preview__ image file associated with a new theme. With your theme, you usually want template, stylesheet, javascript and image files associated with it. To do so you can create new ones or upload existing ones into the theme. Check the "documentation (Adva Editing Themes)":adva-edit-theme for more detailed information. For this demo I will override the default layout template, create my CSS file, a few partials and upload the corresponding images. To override the default layout, create this file:
+
+{% highlight rhtml %}
+# templates/layouts/default.html.erb
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title><%= @section.title %></title>
+    <%= theme_stylesheet_link_tag 'nvc', 'nvc/vet10.css' %> 
+    <%= yield :head %> 
+  </head>
+  <body>
+    <div id="top"><a href="#content">Skip to content</a></div>
+    <div id="wrapper">
+			<div id="header">
+				<%= render :partial => "/partials/header_image" %>
+			</div>
+
+			<div id="aside">
+				<div id="nav_left">
+					<%= Menus::Sections.new.build(self).root.render(:id => 'sections') %>
+				</div>
+					<%= render :partial => "/partials/medal_image" %>
+			</div><!-- #aside -->
+
+			<div id="content">
+				<div id="intro">
+					<h2><%= @section.title %></h2>
+				</div><!-- #intro -->
+
+				<div id="content_main">
+					<%= yield %>
+				</div><!-- #content_main -->
+			</div><!-- #content -->
+			<div style='clear:both' />
+			<div id="footer">
+				<%= Menus::Sections.new.build(self).root.render(:id => 'sections') %>
+			</div>
+    </div>
+  </body>
+</html>
+{% endhighlight %}
+
+p. a few things to notice:
+
+{% highlight rhtml %}
+<title><%= @section.title %></title>
+{% endhighlight %}
+
+p. In adva-cms, a page is called a __section__ and each section can have one or more __articles__. That is why to get the title of the page I used the __@section__ object. 
+
+p. and: 
+
+{% highlight rhtml %}
+<%= theme_stylesheet_link_tag 'nvc', 'nvc/vet10.css' %> 
+{% endhighlight %}
+
+p. You have some helpers that are available to you for including other files in your code:
+
+{% highlight rhtml %}
+theme_stylesheet_link_tag theme_id, stylesheet_name
+theme_javascript_include_tag theme_id, javascript_name
+theme_image_tag theme_id, image_name
+{% endhighlight %}
+
+p. and:
+
+{% highlight rhtml %}
+<%= render :partial => "/partials/navigation" %>
+{% endhighlight %}
+
+p. There is no special way to create blocks or partials with adva-cms. You need to create a new file that follows the Rails convention for naming partials and then include it in your template just like you would if you were doing any normal Rails views or templates.
+
+p. One thing to note, when creating a new file, the name you give it specifies the directory structure. For example, if you name a file "nvc/vet10.css", a new folder called "nvc" will be created under the stylesheets folder (determined by the extension of the file, would be under the javascripts folder if the extension was .js) and the new file will be created in the new directory. For images, you will have to go back and edit the name of the file after the upload is complete. 
+
+p. Looking at the source code for the adva_cms plugin, specifically at the default layout file you can learn a few things about editing your layout. For example, the following code can be used for menus:
+
+{% highlight rhtml %}
+<%= Menus::Sections.new.build(self).root.render(:id => 'sections') %>
+{% endhighlight%}
+
+p. The source code is probably the best way to look for the way adva-cms does things if you can not find the appropriate help in the wiki pages. So at this point we have created our theme...
+
+div(screenshot). !/images/adva_theme_screenshot.png(Adva Them Screen Shot)!:/images/adva_theme_screenshot.png
+
+p. Created the necessary files and uploaded images...
+
+div(screenshot). !/images/adva_theme_files_screenshot.png(Adva Theme Files Panel Screen Shot)!:/images/adva_theme_files_screenshot.png
+
+p. And we have our site ready.
+
+div(screenshot). !/images/adva_index_screenshot.png(Adva Index Screen Shot)!:/images/adva_index_screenshot.png
+
+p. In adva-cms, you can create as many themes as you want, then activate the one you want your site to use and deactivate the others. Another thing to point is that when creating new sections in your site you can specify which layout file you want it to inherit from. This shows how closely adva-cms follows the Rails conventions and developing for it should feel very familiar if you are used to developing using Ruby on Rails.
+
+p. I must confess, using it for the first did feel a bit weird and different from using other CMSes (which could be a good thing for some people). Some of the plugins that I installed at the beginning of the day seem to be hidden. You do not see any tabs for them on the admin pages. But they are there. For example, the wiki plugin can be used when creating new pages by specifying the type of page you want (Page, Blog, Calendar, Wiki, etc). With this note, I conclude Day One with adva-cms.
+
+[top-20]http://www.ajaxlines.com/ajax/stuff/article/top_ruby_cms.php
+[a-fresh-cup]http://afreshcup.com/home/2009/11/26/rails-cms-alternatives.html
+[comatose-cms]http://comatose.rubyforge.org/
+[community-engine]http://communityengine.org/index.html
+[railfrog]http://www.railfrog.com/
+[homepage]http://communityengine.org/index.html
+[repo]http://github.com/svenfuchs/adva_cms
+[doc]http://adva-cms.org/wiki
+[readme]http://github.com/svenfuchs/adva_cms/blob/master/README
+[adva-edit-theme]http://adva-cms.org/wiki/wikipages/editing-themes
