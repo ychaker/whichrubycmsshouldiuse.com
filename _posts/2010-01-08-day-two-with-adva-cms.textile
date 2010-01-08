@@ -1,0 +1,99 @@
+---
+layout: post
+title: Day Two with adva-cms
+---
+
+p. Previously, we looked into installing a new adva-cms run website and customizing the look and feel. Today I will go a bit deeper into the extended functionality that is available with this CMS. The documentation for this project is spread out in multiple places. Some of it can be find on the "main website (adva-cms Website)":homepage, others in the "README file (adva-cms README file on GitHub)":readme and some at the "GitHub wiki pages (adva-cms GitHub Wiki Pages)":github-wiki. And even if you go through all those sources, the documentation still feels incomplete. Regardless, I will attempt to look into the extra functionality available to us.
+
+p. Remember that last time I did install all of the engines and plugins available by executing the following:
+
+{% highlight bash %}
+rake adva:install:all
+rake adva:assets:install
+{% endhighlight %}
+
+p. So they are all available to us, what is left to do is enable the ones that require extra steps to be enabled and then find out where in the admin interface to go to start working with them. adva-cms claims to provide the functionality of creating multiple sites. But if you were following along with what we did last time you would notice that this option was not available to us. That is because you have to explicitly specify that you want this enabled. To do so, create a new initializer file in your application:
+
+{% highlight rhtml %}
+`-root_directory
+ `-app
+ `-config
+  `-initializers
+   `-...
+   `-adva_init.rb
+{% endhighlight %}
+
+p. You can name that file whatever you want, I named it 'adva_init.rb' and that is where I would add any configuration code related to the adva-cms plugins. In that file add the following lines:
+
+{% highlight rb %}
+# adva_init.rb
+ActionController::Dispatcher.to_prepare do
+  Site.multi_sites_enabled = true
+end
+{% endhighlight %}
+
+p. Those lines will enable the ability of multiple sites for your project. You will notice a new tab being added to your admin panel. Make sure you have restarted your server after editing the initializer file.
+
+div(screenshot-wide). !/images/adva_admin_panel_multiple_sites_screenshot.png(Adva Admin Panel With Multiple Sites Screen Shot)!:/images/adva_admin_panel_multiple_sites_screenshot.png 
+
+p. Navigating to the "Sites" tab will display the list of all the sites you have created,
+
+div(screenshot). !/images/adva_sites_tab_screenshot.png(Adva Sites Tab Screen Shot)!:/images/adva_sites_tab_screenshot.png 
+
+p. and gives the ability to create new ones.
+
+div(screenshot). !/images/adva_new_site_screenshot.png(Adva New Site Screen Shot)!:/images/adva_new_site_screenshot.png 
+
+p. So lets go ahead and create a new site with the following settings:
+
+div(screenshot). !/images/adva_new_site_settings_screenshot.png(Adva New Site Settings Screen Shot)!:/images/adva_new_site_settings_screenshot.png 
+
+p. The important thing to notice is the host name field. Since we are working locally and we want to have both sites running at the same time, we have use a different port number. For this case I went with __3001__. Now, in the terminal, go to your project directory and execute this line:
+
+{% highlight bash %}
+./script/server -p 3001
+{% endhighlight %}
+
+p. This will start another server running on port 3001. Using your web browser, navigating to "http://localhost:3001/ (Local Host on Port 3001)":http://localhost:3001/ will take you to the newly created site.
+
+div(screenshot). !/images/adva_second_site_screenshot.png(Adva Second Site Screen Shot)!:/images/adva_second_site_screenshot.png 
+
+p. Notice that the second site we have created does not inherit the theme. Each site you create is totally independent and does not share settings with your other sites. Some people might want their sites to share themes, but with the ability to export and import themes the process is very easy and simple. 
+
+p. So we have now added the ability to create multiple sites using the adva-cms. Why not also add a WYSIWYG editor? To accomplish that, the idea is basically the same as what we did previously. One of the plugins that we have installed is the FCKeditor plugin. We just need to enable it by adding the following line to our initializer file and restarting the server:
+
+{% highlight rb %}
+# adva_init.rb
+Fckeditor.load!
+{% endhighlight %}
+
+p. And voila: 
+
+div(screenshot). !/images/adva_fckeditor_screenshot.png(Adva FCKeditor Screen Shot)!:/images/adva_fckeditor_screenshot.png 
+
+p. If you have been following along with the previous posts, you know that the demo site I build with each of these CMSes is a conference site. Part of every conference website are events and a calendar. So lets create some events. The first you need to do is create a new section for your site and specify the type to be "Calendar". Once you're done you'll be redirected to the "Events" page for that section. The list will start off empty. Click on the "New" button to create a new event. You should then see the following form.
+
+div(screenshot). !/images/adva_new_event_form_screenshot.png(Adva New Event Form Screen Shot)!:/images/adva_new_event_form_screenshot.png 
+
+p. Fill in the form and you'll have your first event created. If you navigate to the calendar page ("/calendar") you will see your events listed there along with a search form and a monthly calendar. 
+
+div(screenshot). !/images/adva_calendar_screenshot.png(Adva Calendar Screen Shot)!:/images/adva_calendar_screenshot.png 
+
+p. That's pretty much it for events. Lets also take a look at creating photo albums. The process is pretty much the same. Create a new section of type "Album", then under the "Photos" tab in the admin UI upload your images. If you want to group the pictures in photo albums or __sets__, create a new set and then select the checkbox corresponding to the set you want your picture to be published under.
+
+div(screenshot). !/images/adva_new_picture_form_screenshot.png(Adva New Picture Form Screen Shot)!:/images/adva_new_picture_form_screenshot.png 
+
+p. You can view your pictures by going to the album page ("/album") as well as your sets.
+
+div(screenshot). !/images/adva_album_screenshot.png(Adva Calendar Screen Shot)!:/images/adva_album_screenshot.png 
+
+p. The is the same for the other content types available such as Wikis, Forums and of course Blogs. adva-cms does provide a bunch of good stuff out of the box. It is a CMS that is supposed to extend your custom Rails app and give you the tools you need to create typical content such as static pages, blogs, etc. With this note, I conclude Day Two with adva-cms.
+
+
+
+[homepage]http://adva-cms.org/wiki
+[repo]http://github.com/svenfuchs/adva_cms
+[doc]http://adva-cms.org/wiki
+[readme]http://github.com/svenfuchs/adva_cms/blob/master/README
+[adva-edit-theme]http://adva-cms.org/wiki/wikipages/editing-themes
+[github-wiki]http://wiki.github.com/svenfuchs/adva_cms

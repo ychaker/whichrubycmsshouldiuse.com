@@ -188,7 +188,7 @@ p. I must confess, using it for the first did feel a bit weird and different fro
 [comatose-cms]http://comatose.rubyforge.org/
 [community-engine]http://communityengine.org/index.html
 [railfrog]http://www.railfrog.com/
-[homepage]http://communityengine.org/index.html
+[homepage]http://adva-cms.org/wiki
 [repo]http://github.com/svenfuchs/adva_cms
 [doc]http://adva-cms.org/wiki
 [readme]http://github.com/svenfuchs/adva_cms/blob/master/README
