@@ -142,10 +142,42 @@ ul li {
 	margin: 10px;
 	border: 1px solid black;
 }
-
 blockquote {
 	color: rgb(102, 102, 102);
 	font-style: italic;
 	margin: 1.5em;
+}
+table {
+	text-align: center;
+	vertical-align: middle;
+	border-spacing: 0px 0px;
+	border-collapse: separate;
+	width: auto;
+}
+th {
+	background-color: rgb(63, 63, 63);
+	border: 1px solid black;
+	color: white;
+	padding: 4px 10px 4px 5px;
+	margin: 0px -5px;
+	text-align: center;
+	vertical-align: middle;
+}
+td {
+	border: 1px solid gray;
+	padding: 4px 10px 4px 5px;
+	margin: 0px -5px;
+	text-align: center;
+	vertical-align: middle;
+}
+dl {
+	display: block;
+	margin: 0px 0px 1.5em 0px;
+}
+dl dt {
+	font-weight: bold;
+}
+dd {
+	margin-left: 1.5em;
 }
 /* end post page */

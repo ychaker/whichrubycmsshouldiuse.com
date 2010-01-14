@@ -1,0 +1,52 @@
+---
+layout: post
+title: Recap of First Two Weeks
+---
+
+p. Time for a recap. Most of you are probably been waiting for this post. This is the results post, where I break down the experience gained from the past couple of weeks and try to give you all the information you need, as organized as possible, to make a decision on __Which Ruby CMS Should You Use__ when starting your next project. 
+
+p. In the past few weeks I have mainly discussed three Ruby CMS projects that are available but a few others are also worthy candidates. And here is what I have learnt. 
+
+|_. |_. Drupal|_. BrowserCMS|_. Radiant|_. adva-cms|
+|_. Links|	"homepage (Drupal Homepage Link)":drupal-homepage - "documentation (Drupal Documentation Link)":drupal-doc - "modules repo (Drupal Modules Repo Link)":drupal-modules-repo | "homepage (BrowserCMS Homepage Link)":bcms-homepage - "repo (BrowserCMS Repo Link)":bcms-repo - "documentation (BrowserCMS Documentation Link)":bcms-doc - "modules repo (BrowserCMS Modules Repo Link)":bcms-modules-repo | "homepage (Radiant Homepage Link)":radiant-homepage - "repo (Radiant Repo Link)":radiant-repo - "documentation (Radiant Documentation Link)":radiant-doc - "modules repo (Radiant Modules Repo Link)":radiant-modules-repo | "homepage (adva-cms Homepage Link)":adva-homepage - "repo (adva-cms Repo Link)":adva-repo - "documentation (adva-cms Documentation Link)":adva-doc |
+|_. Documentation| Core documentation is ok, but very brief and rarely helpful. Forums are messy, long and badly organized. Documentation for Drupal 5 gets mixed with those of Drupal 6. | Not complete, there is enough to get you started and the responses to the mailing list are fast. But documentation definitely needs completion and expansion. | Extensive documentation with more than a 100 wiki pages. Great support on the mailing list and by community. | Limited documentation (probably because there is little to document!). |
+|_. Installing| Manageable: download the source code, configure a settings file or two, create your DB and run the installation script (all of it has to be done each time). | Easy: Install the gem (once), create your Rails app using the template, create your DB and run the rake tasks. |  Easy: Install the gem (once), create your Radiant app, create your DB and run the rake tasks. | Very Easy: Create your DB, create your Rails app using the template, and fill the simple form. |
+|_. Upgrading| Ridiculously difficult, specially if you are using SVN in your team for source control. | Piece of cake, install the appropriate gem version and regenerate the file. | Fairly simple, also requires updating the gem and then updating the Radiant assets in your project | No clue, sorry! |
+|_. Theming| Requires creating multiple templates (one general page template and then one for each section or view) and multiple hook functions. Keeping track of all the places to commit changes can get too cumbersome. People using a CMS want to develop their website in their web browser and Drupal forces designers to work with source code. | Have to create template files, but development can happen in the browser. Only need upload a CSS file with your project. | Everything happens in the browser, even creating stylesheets. ALso provides ability for templates to inherit from other templates. | Everything happens in the browser, with also the ability to upload existing files into your theme. |
+|_. Modules/Extensions (list)| A huge list of modules is available, one of the compelling things about this CMS | Very short and limited list, but that might change soon. And the ease of writing your own makes up for it. | A good size list with probably everything you might need. | Small number of extensions that all come with the template. |
+|_. Modules/Extensions (creating your own)| It requires writing PHP code, need I say more? I guess I will anyway, you will need to know all the hooks and weird function names that will make your module work. No separation of code between business logic and view logic. Did I mention PHP already? | Develop Rails models that hook into the CMS through magic words.  | Create a Rails app using all the awesome things it provides and then copy the necessary files over as an extension. | Can use the Rails Engine plugins system to create extensions. Or create your custom MVC content just like you would with a regular Rails app. |
+|_. Extended Custom Functionality| Done through modules. | Achieved just like in any other Rails app. | Done through extensions. | Achieved just like in any other Rails app. |
+|_. Hooking to Existing App| It is your app! | Seamless integration. The CMS runs through the gem and is completely separate for the rest of the app. | It is your main app. With possibility of integration through Rails Rack. | Allows the possibility to import existing app into the project (involves copying the files over). Building a custom application on top of the CMS is the better way of going about it. |
+|_. Extra, Cool Features| Views and CCK. | Some sort of in place editing. Ability to create subparts of pages that can be easily shared. | Ability to setup a blog quickly through the database template at installation. | Multiple Site support. |
+
+h3. Final Verdict
+
+p. As the header of this blog suggests, the answer to the questions __Which Ruby CMS Should I Use?__ is... 
+
+p. wait for it... 
+
+p. wait some more...
+
+p. "It Depends!"
+
+- Do you know you want to use a CMS from the start AND you know you have the need to use contributed extensions extensively? := Your best bet is Radiant. Arguably the most developed and supported Ruby CMS out there right now.
+- Do you know you want to use a CMS from the start AND you do not have the need to use contributed extensions extensively, and would rather develop your own custom code? := adva-cms is on your side. If all you need is a blog, a forum or a wiki out of your CMS to support your custom app, adva-cms is perfect for that.
+- The need for a CMS came up late in the development process? := BrowserCMS is your friend. Probably the most flexible CMS available but is relatively young.
+
+
+p. Honestly, all of the projects I have looked at have been impressive. If you are a Ruby fan, I recommend you to take a look at one of them for your future CMS needs. I hope the information provided has been helpful. On this note, I will conclude the first phase of this project. 
+
+[bcms-homepage]http://www.browsercms.org/
+[bcms-repo]http://github.com/browsermedia/browsercms
+[bcms-doc]http://www.browsercms.org/doc/guides/html/index.html
+[bcms-modules-repo]http://github.com/browsermedia/
+[radiant-homepage]http://radiantcms.org/
+[radiant-repo]http://github.com/radiant/radiant
+[radiant-doc]http://wiki.github.com/radiant/radiant/
+[radiant-modules-repo]http://ext.radiantcms.org/
+[adva-homepage]http://adva-cms.org/wiki
+[adva-repo]http://github.com/svenfuchs/adva_cms
+[adva-doc]http://adva-cms.org/wiki
+[drupal-homepage]http://drupal.org/
+[drupal-doc]http://drupal.org/handbooks
+[drupal-modules-repo]http://drupal.org/project/modules

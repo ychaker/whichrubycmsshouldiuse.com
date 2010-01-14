@@ -3,7 +3,7 @@ layout: post
 title: Day One with adva-cms
 ---
 
-p. After looking at two of the most popular or talked about Ruby CMSes out there it is time to look at what else is out there. Searching (or Googling) for "Ruby CMS" or "Rails CMS" brings back a few results but most of them are blog posts, articles or questions about the topic. You are required to do some deep digging before getting a good list of available CMSes. AjaxLines has an article about the "Top 20 Ruby CMS (Top 20 Ruby CMS Article)":top-20 but the post is from August 2006 and the information on there is outdated. A more recent post can be found on "A Fresh Cup (Rails CMS Alternatives Post)":a-frash-cup which provides more current information. The post provides a good list of projects. I would like to add to it that even though "Comatose (Comatose CMS)":comatose-cms is listed under the __inactive__ list, it is still an alternative worth looking into. "RailFrog (RailFrog CMS)":railfrog is another project that looks to have good documentation and shows signs of life. It also has to parts of the project, one that allows you to create you CMS project immediately and one that hooks to your Rails app through the Engines system. Another CMS worth investigating is "Community Engine (Community Engine Homepage)":community-engine, which seems to give you a lot out of the box and does that well but I have heard that developing for it is a pain.
+p. After looking at two of the most popular or talked about Ruby CMSes out there it is time to look at what else is out there. Searching (or Googling) for "Ruby CMS" or "Rails CMS" brings back a few results but most of them are blog posts, articles or questions about the topic. You are required to do some deep digging before getting a good list of available CMSes. AjaxLines has an article about the "Top 20 Ruby CMS (Top 20 Ruby CMS Article)":top-20 but the post is from August 2006 and the information on there is outdated. A more recent post can be found on "A Fresh Cup (Rails CMS Alternatives Post)":a-fresh-cup which provides more current information. The post provides a good list of projects. I would like to add to it that even though "Comatose (Comatose CMS)":comatose-cms is listed under the __inactive__ list, it is still an alternative worth looking into. "RailFrog (RailFrog CMS)":railfrog is another project that looks to have good documentation and shows signs of life. It also has to parts of the project, one that allows you to create you CMS project immediately and one that hooks to your Rails app through the Engines system. Another CMS worth investigating is "Community Engine (Community Engine Homepage)":community-engine, which seems to give you a lot out of the box and does that well but I have heard that developing for it is a pain.
 
 p. All of the afore mentioned projects look to be good candidates, but I have decided that today I will take a look at one of the probably lesser known ones called "adva-cms". You can find adva at its "home (adva-cms homepage)":homepage and the repo on "GitHub (adva-cms repo)":repo. Looking at the README file of the project, the first thing that catches my eyes is the following: 
 
@@ -30,7 +30,7 @@ bq.  # this might take a bit, grab a coffee meanwhile :)
 p. If you have not created your database before hand you will see something like this: 
 
 {% highlight bash %}
- rake  adva:install:core -R vendor/adva/engines/adva_cms/lib/tasks
+rake  adva:install:core -R vendor/adva/engines/adva_cms/lib/tasks
 rake aborted!
 Unknown database 'adva_demo_development'
 
