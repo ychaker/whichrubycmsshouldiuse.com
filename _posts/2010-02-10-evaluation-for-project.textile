@@ -33,11 +33,11 @@ p. One way to figure out if a certain CMS is capable of providing certain functi
 
 p. Judging from the table above, it is easy to say that Radiant is ahead of all the other options. What Radiant does not provide out of the box, it makes up for through its extensions. Radiant's extensions are the most developed and extensive. But if you have been following along with the posts you should know that Radiant is less flexible than the other mentioned CMS projects. Radiant allows you to extend its functionality only through creating extensions. Which means that if additional requirements come up and those requirements have not been covered by existing Radiant extensions, fulfilling those requirements might be a more challenging task. Community Engine presents a good case for itself. Although it might be missing one or two key functions, it covers the majority of the requirements. Unfortunately, I have heard from fellow developers that, unlike what the website says, developing for Community Engine is a pain and not recommended. BrowserCMS and adva_cms are the most flexible of the bunch, BrowserCMS in particular provides the easier interface to develop for, and they both plug-in to your application, so you have the freedom to create a custom app that hooks into your CMS. 
 
-p. The question then becomes: is it worth it to opt of flexibility in developing custom functionality over existing ones? 
+p. The question then becomes: is it worth it to opt for flexibility in developing custom functionality over existing ones? 
 
 p. Developing for Radiant is possible, just more tedious compared to BrowserCMS. Additional requirements are not guaranteed and it does not seem prudent to choose a solution other than Radiant since it provides an easy implementation for each item in the current set of requirements. 
 
-p. Given a bigger budget and more time (more than 5 weeks for the entire implementation and launch), it would have been interesting to develop the site using BrowserCMS and extract from the end product the missing modules (forum, newsletter ...) and make those available for the community. As the situation stands though, Radiant looks to be the favorite for this project.
+p. Given a bigger budget and more time (more than 5 weeks for the entire implementation and launch), it would have been interesting to develop the site using BrowserCMS and extract from the end product the missing modules (forum, newsletter ...) and make those available for the community. As the situation stands though, Radiant looks to be the favorite for this project. 
 
 [radiant-news]http://ext.radiantcms.org/extensions/70-news
 [radiant-reader]http://ext.radiantcms.org/extensions/155-reader
