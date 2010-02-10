@@ -1,0 +1,55 @@
+---
+layout: post
+title: Evaluation for Project
+---
+
+p. I have been commissioned to prepare an evaluation for which CMS best fits a project with the following criteria: 
+
+* Ability to publish news articles
+* A Blog
+* A Forum/Message Board
+* Newsletters
+* Multimedia (videos and public service announcements)
+* Static Pages
+* Community
+* Users with different privileges relating to the different parts of the site
+
+p. The site will server as a source for people suffering from certain difficulties (will keep that under wraps for privacy reasons) where they can find helpful information and support for dealing with their situation. The individuals in question will be able to come to the site to have their questions answered or find valuable information that will be helpful to them. The site will also perform the role of a community portal where members will be able to post to a forum or receive the latest information through news articles or blog posts.
+
+p. The CMS will have to allow for many scenarios including the ability for certain users to have the required privileges to post the static content of the site, such as an "Information" page or a "FAQ" page. Other users will be allowed to post news articles and some will have privileges to post blog posts. The CMS needs to also allow for user registrations and those users will then have user profiles, the ability to post and read messages in the forum and will be listed in the "Community" page where other registered users can track their activity. 
+
+p. The concept of the site is not new, many existing websites follow the same idea. My mission is to provide an evaluation of the Ruby CMS options that would provide the best platform to accomplish this goal.
+
+p. One way to figure out if a certain CMS is capable of providing certain functionality is to search through the extensions list. A CMS's primary function is to provide an easy way to create a website that is content heavy but where most of the content is static, so we do not have to worry about that aspect of the project. So here is a list of extensions for each CMS that might contribute to the solution we are looking for:
+
+|_. |_. BrowserCMS|_. Radiant|_. adva-cms (all the extensions come with the CMS, look at the previous posts for more info)|_. Wild Card Entry: "Community Engine (Community Engine Home Page)":communit-engine-home |
+|_. News| "news (BrowserCMS News Module)":bcms-news	| "news (Radiant News Extension)":radiant-news | | |
+|_. Blog|	"blog (BrowserCMS Blog Module)":bcms-blog | Radiant is built to support blogs out of the box but a couple of extensions provide more support: "blog (Radiant Blog Extension)":radiant-blog - "blog-tags (Radiant Blog Tags Extension)":radiant-blog-tags | adva_blog | built in |
+|_. Forum| | "forum (Radiant Forum Extension)":radiant-forum - "group-forum (Radiant Group Forum Extension)":radiant-group-forum | adva_forum | built in |
+|_. Newsletters|	| "reader (Radiant Reader Extension)":radiant-reader - "reader-group (Radiant Reader Group Extension)":radiant-reader-group. The reader extension is used across the board (users registration, forum, etc.) | adva_newsletter | built in through private messaging |
+|_. Multimedia|	available through attachments | "paperclipped (Radiant Paperclipped Extension)":radiant-paperclipped - "paperclipped-player (Radiant Paperclipped Player Extension)":radiant-paperclipped-player - "paperclipped-uploader (Radiant Paperclipped Uploader Extension)":radiant-paperclipped-uploader | | |
+|_. Community/Users|	| "members (Radiant Members Extension)":radiant-members - "reader (Radiant Reader Extension)":radiant-reader | adva_user - adva_activity | built in |
+
+
+p. Judging from the table above, it is easy to say that Radiant is ahead of all the other options. What Radiant does not provide out of the box, it makes up for through its extensions. Radiant's extensions are the most developed and extensive. But if you have been following along with the posts you should know that Radiant is less flexible than the other mentioned CMS projects. Radiant allows you to extend its functionality only through creating extensions. Which means that if additional requirements come up and those requirements have not been covered by existing Radiant extensions, fulfilling those requirements might be a more challenging task. Community Engine presents a good case for itself. Although it might be missing one or two key functions, it covers the majority of the requirements. Unfortunately, I have heard from fellow developers that, unlike what the website says, developing for Community Engine is a pain and not recommended. BrowserCMS and adva_cms are the most flexible of the bunch, BrowserCMS in particular provides the easier interface to develop for, and they both plug-in to your application, so you have the freedom to create a custom app that hooks into your CMS. 
+
+p. The question then becomes: is it worth it to opt of flexibility in developing custom functionality over existing ones? 
+
+p. Developing for Radiant is possible, just more tedious compared to BrowserCMS. Additional requirements are not guaranteed and it does not seem prudent to choose a solution other than Radiant since it provides an easy implementation for each item in the current set of requirements. 
+
+p. Given a bigger budget and more time (more than 5 weeks for the entire implementation and launch), it would have been interesting to develop the site using BrowserCMS and extract from the end product the missing modules (forum, newsletter ...) and make those available for the community. As the situation stands though, Radiant looks to be the favorite for this project.
+
+[radiant-news]http://ext.radiantcms.org/extensions/70-news
+[radiant-reader]http://ext.radiantcms.org/extensions/155-reader
+[radiant-reader-group]http://ext.radiantcms.org/extensions/159-reader-group
+[radiant-members]http://ext.radiantcms.org/extensions/122-members
+[radiant-blog]http://ext.radiantcms.org/extensions/30-blog
+[radiant-blog-tags]http://ext.radiantcms.org/extensions/38-blog-tags
+[radiant-forum]http://ext.radiantcms.org/extensions/156-forum
+[radiant-group-forum]http://ext.radiantcms.org/extensions/160-group-forum
+[radiant-paperclipped]http://ext.radiantcms.org/extensions/20-paperclipped
+[radiant-paperclipped-player]http://ext.radiantcms.org/extensions/166-paperclipped-player
+[radiant-paperclipped-uploader]http://ext.radiantcms.org/extensions/165-paperclipped-uploader
+[bcms-news]http://github.com/browsermedia/bcms_news
+[bcms-blog]http://github.com/browsermedia/bcms_blog
+[community-engine-home]http://communityengine.org/index.html
