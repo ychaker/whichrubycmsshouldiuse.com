@@ -1,0 +1,49 @@
+---
+layout: post
+title: Radiant Acts As Solr Extension
+---
+
+p. I set out to try and build an extension for Radiant that would incorporate Solr search into the CMS. First thing I have to say is:
+
+p. WOW!
+
+p. It is not an easy task to accomplish. What I wanted to provide is a fully customizable configuration to Solr with the ability for the user to select certain settings, which tables to index, etc. A bit à la Drupal's "Apache Solr Module (Drupal's Apache Solr Module)":drupal-solr but for Radiant (of course). That is easier said than done, the Drupal module is big and provides a good amount of features and customizations. I only had a few days to have a usable product (by few I mean less than a week).
+
+p. I definitely could not build something from scratch, so I turned my focus towards building something on top of a library/plugin/gem that has been built for Rails. The one that pops up in all the searches is the "acts_as_solr pluging (Acts As Solr Plugin for Rails)":aas-github. The plugin is easy to use, check the "wiki page (Acts As Solr Wiki)":aas-wiki for more information. Unfortunately the life of the plugin has had some ups and downs, twists and turns. The repository has been forked many times on GitHub and it is unclear what its future will be. Regardless, it will be a start...
+
+p. Before going on about the extension, I wanted to share something cool. If you are a Rails developer, you've probably heard of "cucumber (Cucumber on GitHub)":cucumber. I had used rspec on my Rails projects and I try to use a new or different tool each time I start a new project, factory_girl was an example for my last fun project, and cucumber is what I wanted to try out this time. Unfortunately I didn't do much with it this time around, but when I installed it for the temp app I was planning on using for developing the extension I got some blinking __stuff__ (what might be seen as blinking cucumbers) in the console. Here's the screenshots:
+
+div(screenshot). !/images/cucumber_a_screenshot.png(Cucumber Screenshot)!:/images/cucumber_a_screenshot.png 
+
+div(screenshot). !/images/cucumber_b_screenshot.png(Cucumber Screenshot)!:/images/cucumber_b_screenshot.png 
+
+p. Back to the extension...
+
+p. What I decided to do is create a search controller and a search page. The search page will include the search form and the facets if they exist. The controller will handle filtering the search results based on the selected facet. The following screenshots illustrate the search page:
+
+div(screenshot). !/images/search_page_screenshot.png(Search Page Screenshot)!:/images/search_page_screenshot.png 
+
+div(screenshot). !/images/search_form_screenshot.png(Search Form Screenshot)!:/images/search_form_screenshot.png 
+
+div(screenshot). !/images/facets_all_screenshot.png(All Facets Screenshot)!:/images/facets_all_screenshot.png 
+
+div(screenshot). !/images/facets_reduced_screenshot.png(Reduced Facets Screenshot)!:/images/facets_reduced_screenshot.png 
+ 
+p. Each section of the page is in its own partial, and the layout of the page can controlled through CSS, which will control where the facets div will be placed in relation to the results div. The extension is configurable through a YAML file, where the admin can specify which models are to be indexed, which fields for each model to index and which fields to include in the facets, and among the configuration options is the layout from which the search page will inherit.
+
+p. I installed the extension in the demo instance that I used in my previous posts, and specified the layout that I created then to be the one used for the search page, as is shown in this screenshot:
+
+div(screenshot). !/images/solr_in_demo.png(Solr in Demo App Screenshot)!:/images/solr_in_demo.png
+
+p. For more information, check out the "GitHub repository (ActsAsSolr Radiant Extension on GitHub)":aas-extension-github or on the Radiant extensions registry "entry (Radiant Extensions Registry Link)":aas-extension-regityr
+
+p. There is definitely a lot left to do, but this is a start! I hope it will be a useful extension for people and feel free to grab the source and improve it as you see fit.
+
+
+
+[drupal-solr]http://drupal.org/project/apachesolr
+[aas-wiki]http://wiki.github.com/mattmatt/acts_as_solr/
+[aas-github]http://github.com/mattmatt/acts_as_solr
+[cucumber]http://github.com/aslakhellesoy/cucumber
+[aas-extension-github]http://github.com/ychaker/radiant-acts_as_solr-extension
+[aas-extension-regityr]http://ext.radiantcms.org/extensions/201-acts-as-solr
